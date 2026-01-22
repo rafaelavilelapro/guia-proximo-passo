@@ -15,6 +15,31 @@
     <meta property="og:description" content="Entenda o que muda quando você tem um sistema.">
     <meta property="og:type" content="website">
     
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SDZHV0SXKJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SDZHV0SXKJ');
+    </script>
+    
+    <!-- Meta Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '820387444076157');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=820387444076157&ev=PageView&noscript=1"/></noscript>
+
     <style>
         :root {
             --azul-petroleo: #223C50;
@@ -942,7 +967,7 @@
 
     <script>
         // ===== CONFIGURAÇÃO =====
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwLw4go-euqom0mEAEkuJ7emvT12Do1vGPLkgKFjI4sXKGXsAkytlie9GLB-Gf1maML/exec';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwq_uz1GgU5vaVa82jqIDpDMxkAYLHt172-Pfnrk8oKwOf1H9xOni4nQhQJKbwMP8Ba/exec';
         
         // ===== CAPTURA UTMs =====
         function getUTMs() {
@@ -1018,6 +1043,18 @@
                 form.style.display = 'none';
                 document.querySelector('.form-footer').style.display = 'none';
                 formSuccess.classList.add('show');
+
+                // Meta Pixel - Lead
+                fbq('track', 'Lead', {
+                    content_name: 'ebook_diagnostico',
+                    content_category: 'ebook'
+                });
+                
+                // GA4 - Lead
+                gtag('event', 'generate_lead', {
+                    event_category: 'formulario',
+                    event_label: 'ebook_diagnostico'
+                });
                 
             } catch (error) {
                 console.error('Erro:', error);
