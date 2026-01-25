@@ -40,6 +40,20 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=820387444076157&ev=PageView&noscript=1"/></noscript>
 
+    <!-- Rastreador Brevo -->
+    <script src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
+    <script>
+        // Version: 2.0
+        window.Brevo = window.Brevo || [];
+        Brevo.push([
+            "init",
+            {
+            client_key: "6attwbpquzmrcb50vdvbm9ug",
+            // Optional: Add other initialization options, see documentation
+            }
+        ]);
+    </script>
+    
     <style>
         :root {
             --azul-petroleo: #223C50;
@@ -1055,6 +1069,28 @@
                     event_category: 'formulario',
                     event_label: 'ebook_diagnostico'
                 });
+
+                // Evento personalizado Brevo no frontend
+                Brevo.push([
+                  "track",
+                  "baixou_ebook", // Nome do evento
+                  {
+                    email: formData.get('email'),            // Email do contato
+                    FIRSTNAME: formData.get('nome')           // Nome (opcional)
+                  },
+                  {
+                    id: "ebook_diagnostico",                   // ID do evento para organização
+                    data: {
+                      ebook: "ebook_diagnostico",                    // Nome do ebook
+                      faixa_faturamento: formData.get('faixa_faturamento') || '',
+                      origem: formData.get('origem') || '',
+                      utm_source: formData.get('utm_source') || '',
+                      utm_medium: formData.get('utm_medium') || '',
+                      utm_campaign: formData.get('utm_campaign') || '',
+                      utm_content: formData.get('utm_content') || ''
+                    }
+                  }
+                ]);
                 
             } catch (error) {
                 console.error('Erro:', error);
